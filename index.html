@@ -140,10 +140,25 @@
 
   <!-- ============================ SCRIPTS =============================== -->
   <!-- Bibliotecas opcionales desde CDN. Cada módulo comprueba su existencia
-       antes de usarlas, de modo que su ausencia nunca rompe la aplicación. -->
-  <script defer src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/minisearch@7.1.0/dist/umd/index.js" crossorigin="anonymous"></script>
+       antes de usarlas, de modo que su ausencia nunca rompe la aplicación.
+
+       VAN CON `async`, NO CON `defer`, Y ESO ES IMPORTANTE.
+       Los scripts con `defer` retrasan el evento DOMContentLoaded hasta que
+       terminan de descargarse, y la aplicación arranca al terminar el análisis
+       del documento. Medido en la dirección publicada: Leaflet, Chart.js y
+       MiniSearch tardaban 11 segundos en llegar desde el CDN, y por eso la
+       pantalla de arranque se quedaba 17,7 segundos a la vista en la primera
+       visita. Con `async` se descargan igual de rápido pero ya no bloquean
+       nada: el mapa, las gráficas y la búsqueda aparecen cuando sus módulos
+       los necesitan, que es justo como están escritos.
+
+       Y hay un caso peor que la lentitud: en una red donde el CDN esté
+       bloqueado, `defer` dejaba la aplicación esperando hasta que el navegador
+       se rindiera. PANGEA existe para funcionar donde la red es mala o no hay
+       red, así que no puede depender de un tercero para arrancar. -->
+  <script async src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" crossorigin="anonymous"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/minisearch@7.1.0/dist/umd/index.js" crossorigin="anonymous"></script>
 
   <!-- Arranque de la PWA. El registro del Service Worker se hace aparte para
        que la app siga funcionando aunque el navegador no lo soporte. -->
