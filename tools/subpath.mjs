@@ -1,33 +1,33 @@
 /**
- * PANGEA Â· tools/subpath.mjs
+ * PANGEA · tools/subpath.mjs
  * Comprueba que PANGEA funciona servida desde una SUBCARPETA.
  *
  *     node tools/subpath.mjs
  *     node tools/subpath.mjs --sub otra-carpeta --port 8193
  *     node tools/subpath.mjs --url https://usuario.github.io/index-maestro-universal/
  *
- * Con `--url` no se copia nada: se comprueba la direcciÃ³n YA PUBLICADA. Es la
- * comprobaciÃ³n que de verdad demuestra que el despliegue funciona, porque no
- * simula nada; y sÃ³lo se puede hacer cuando la aplicaciÃ³n ya estÃ¡ en internet.
+ * Con `--url` no se copia nada: se comprueba la dirección YA PUBLICADA. Es la
+ * comprobación que de verdad demuestra que el despliegue funciona, porque no
+ * simula nada; y sólo se puede hacer cuando la aplicación ya está en internet.
  *
- * POR QUÃ‰ HACE FALTA ESTA PRUEBA
+ * POR QU�0 HACE FALTA ESTA PRUEBA
  * ------------------------------
- * PANGEA se publica en una direcciÃ³n del tipo
+ * PANGEA se publica en una dirección del tipo
  *
  *     https://usuario.github.io/index-maestro-universal/
  *
- * y no en la raÃ­z de un dominio. Esa diferencia rompe en silencio todo lo que
- * estÃ© escrito con una barra delante: Â«/index.htmlÂ» apunta fuera de la
- * subcarpeta. La pÃ¡gina puede abrirse y verse bien mientras el Service Worker,
- * el manifiesto o los datos fallan por detrÃ¡s, y eso no se descubre hasta que
- * ya estÃ¡ publicado y alguien lo instala.
+ * y no en la raíz de un dominio. Esa diferencia rompe en silencio todo lo que
+ * esté escrito con una barra delante: «/index.html» apunta fuera de la
+ * subcarpeta. La página puede abrirse y verse bien mientras el Service Worker,
+ * el manifiesto o los datos fallan por detrás, y eso no se descubre hasta que
+ * ya está publicado y alguien lo instala.
  *
- * Esta prueba copia el proyecto a una carpeta temporal con la forma que tendrÃ¡
+ * Esta prueba copia el proyecto a una carpeta temporal con la forma que tendrá
  * publicada, la sirve y abre un navegador de verdad. Comprueba lo que decide si
- * el despliegue sirve: que la aplicaciÃ³n arranque (que la cortina de arranque
+ * el despliegue sirve: que la aplicación arranque (que la cortina de arranque
  * desaparezca de verdad), que el manifiesto se lea, que el Service Worker coja
  * el alcance correcto, que TODOS los recursos precargados existan sin un solo
- * 404 y que siga arrancando sin conexiÃ³n.
+ * 404 y que siga arrancando sin conexión.
  */
 
 import { spawn, spawnSync } from 'node:child_process';
@@ -64,20 +64,20 @@ const dormir = (ms) => new Promise((r) => setTimeout(r, ms));
 const resultados = [];
 const anotar = (nombre, ok, detalle = '') => {
   resultados.push({ nombre, ok, detalle });
-  console.log(`  ${ok ? 'âœ“' : 'âœ—'} ${nombre}${detalle ? ' â€” ' + detalle : ''}`);
+  console.log(`  ${ok ? '�S' : '�S'} ${nombre}${detalle ? ' � ' + detalle : ''}`);
 };
 
 const navegador = NAVEGADORES[0];
 if (!navegador) {
-  console.error('\n  No se encontrÃ³ Chrome ni Edge. Esta prueba necesita un navegador.\n');
+  console.error('\n  No se encontró Chrome ni Edge. Esta prueba necesita un navegador.\n');
   process.exitCode = 1;
   process.exit();
 }
 
-console.log('\nâ”€â”€ Despliegue en subcarpeta â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€');
+console.log('\n���� Despliegue en subcarpeta ��������������������������������������������������������������������������������');
 
 /* Se puede comprobar una carpeta local (simulando el despliegue) o una
-   direcciÃ³n ya publicada. Lo segundo es mÃ¡s concluyente porque no simula nada. */
+   dirección ya publicada. Lo segundo es más concluyente porque no simula nada. */
 const urlPublicada = arg('--url', null);
 let servidor = null;
 let DIRECCION;
@@ -107,12 +107,12 @@ if (urlPublicada) {
 }
 
 /* La ruta que debe tener el alcance del Service Worker, sea cual sea el sitio
-   donde se estÃ© sirviendo. */
+   donde se esté sirviendo. */
 const RUTA_ESPERADA = new URL(DIRECCION).pathname;
 
 console.log(`  Navegador: ${navegador}`);
 console.log(`  Objetivo:  ${DIRECCION}`);
-console.log(urlPublicada ? '  (direcciÃ³n publicada de verdad)\n' : '  (copia local con la forma del despliegue)\n');
+console.log(urlPublicada ? '  (dirección publicada de verdad)\n' : '  (copia local con la forma del despliegue)\n');
 
 const perfil = await mkdtemp(join(tmpdir(), 'pangea-perfil-'));
 const hijo = spawn(navegador, [
@@ -123,7 +123,7 @@ const hijo = spawn(navegador, [
 try {
   for (let i = 0; i < 60; i++) {
     await dormir(300);
-    try { if ((await fetch(`http://127.0.0.1:${PUERTO_CDP}/json/version`)).ok) break; } catch { /* aÃºn no */ }
+    try { if ((await fetch(`http://127.0.0.1:${PUERTO_CDP}/json/version`)).ok) break; } catch { /* aún no */ }
   }
 
   const lista = await (await fetch(`http://127.0.0.1:${PUERTO_CDP}/json/list`)).json();
@@ -138,15 +138,15 @@ try {
   const pendientes = new Map();
   const errores = [];
   const peticiones404 = [];
-  /* Durante la fase sin conexiÃ³n es NORMAL que fallen peticiones: eso es
-     justamente lo que se estÃ¡ probando. Contarlas como errores harÃ­a que la
-     prueba fallara precisamente cuando la aplicaciÃ³n se comporta bien. Las
-     excepciones de JavaScript sÃ­ se cuentan siempre, porque Ã©sas serÃ­an un
+  /* Durante la fase sin conexión es NORMAL que fallen peticiones: eso es
+     justamente lo que se está probando. Contarlas como errores haría que la
+     prueba fallara precisamente cuando la aplicación se comporta bien. Las
+     excepciones de JavaScript sí se cuentan siempre, porque ésas serían un
      fallo incluso sin red. */
   let enLinea = true;
   ws.addEventListener('message', (ev) => {
     const m = JSON.parse(ev.data);
-    if (m.method === 'Runtime.exceptionThrown') errores.push(m.params.exceptionDetails.text || 'excepciÃ³n');
+    if (m.method === 'Runtime.exceptionThrown') errores.push(m.params.exceptionDetails.text || 'excepción');
     if (m.method === 'Log.entryAdded' && m.params.entry.level === 'error' && enLinea) errores.push(m.params.entry.text);
     if (m.method === 'Network.responseReceived' && m.params.response.status === 404) {
       peticiones404.push(m.params.response.url);
@@ -177,15 +177,24 @@ try {
   await enviar('Log.enable');
   await enviar('Page.navigate', { url: DIRECCION });
 
-  /* ---- 1. La aplicaciÃ³n arranca de verdad ------------------------------- */
+  /* ---- 1. La aplicación arranca de verdad ------------------------------- */
   /* No basta con que el HTML llegue: hay que esperar a que la cortina de
-     arranque se quite sola. Si el JavaScript no arranca, la pÃ¡gina se queda
-     tapada por esa cortina y ninguna comprobaciÃ³n de HTML lo detectarÃ­a. */
+     arranque se quite sola. Si el JavaScript no arranca, la página se queda
+     tapada por esa cortina y ninguna comprobación de HTML lo detectaría.
+
+     La espera es GENEROSA a propósito. Con `--url` esto se ejecuta contra una
+     web publicada y una conexión real, y una conexión lenta puede tardar veinte
+     segundos en bajar los 465 KB de la primera visita. Esperar poco hacía fallar
+     la prueba en una red lenta aunque la aplicación funcionara perfectamente, y
+     una prueba que miente es peor que no tenerla. */
+  const LIMITE = Number(arg('--timeout', 60000));
+  const t0 = Date.now();
   let arrancada = false;
-  for (let i = 0; i < 100; i++) {
-    await dormir(200);
+  let msArranque = 0;
+  while (Date.now() - t0 < LIMITE) {
+    await dormir(250);
     const listo = await evaluar(`return { arrancando: document.documentElement.hasAttribute('data-booting'), app: !!document.querySelector('#app .app-sidebar, #app nav, #sidebar') };`).catch(() => null);
-    if (listo && !listo.arrancando && listo.app) { arrancada = true; break; }
+    if (listo && !listo.arrancando && listo.app) { arrancada = true; msArranque = Date.now() - t0; break; }
   }
   const estado = await evaluar(`return {
     arrancando: document.documentElement.hasAttribute('data-booting'),
@@ -194,9 +203,9 @@ try {
     principal: !!document.querySelector('#main'),
     titulo: document.title,
   };`);
-  anotar('La aplicaciÃ³n arranca y la cortina de arranque desaparece',
+  anotar('La aplicación arranca y la cortina de arranque desaparece',
     arrancada && !estado.cortinaVisible,
-    `Â«${estado.titulo}Â» Â· barra=${estado.barra} Â· principal=${estado.principal} Â· cortina visible=${estado.cortinaVisible}`);
+    `«${estado.titulo}» · arrancó en ${(msArranque / 1000).toFixed(1)} s · barra=${estado.barra} · principal=${estado.principal} · cortina visible=${estado.cortinaVisible}`);
 
   /* ---- 2. El manifiesto ------------------------------------------------- */
   const manifiesto = await enviar('Page.getAppManifest');
@@ -209,9 +218,9 @@ try {
     const m = await (await fetch('manifest.json')).json();
     return { declarado: m.id, resuelto: new URL(m.id, new URL('manifest.json', location.href)).href, esperado: location.href };
   `);
-  anotar('El identificador de la aplicaciÃ³n apunta a la subcarpeta',
+  anotar('El identificador de la aplicación apunta a la subcarpeta',
     identidad.resuelto === identidad.esperado,
-    `id: Â«${identidad.declarado}Â» â†’ ${identidad.resuelto}`);
+    `id: «${identidad.declarado}» �  ${identidad.resuelto}`);
   anotar('El alcance del manifiesto es la subcarpeta',
     String(parseado.scope || '').endsWith(RUTA_ESPERADA), `${parseado.scope}`);
 
@@ -226,13 +235,13 @@ try {
   `);
   anotar('El Service Worker se registra con el alcance correcto',
     sw.ok && String(sw.alcance).endsWith(RUTA_ESPERADA),
-    sw.ok ? `alcance=${sw.alcance} Â· activo=${sw.activo}` : `ERROR: ${sw.error}`);
+    sw.ok ? `alcance=${sw.alcance} · activo=${sw.activo}` : `ERROR: ${sw.error}`);
 
   /* ---- 4. Que TODOS los recursos precargados existan -------------------- */
   await dormir(2000);
   const cache = await evaluar(`
     const nombres = await caches.keys();
-    if (!nombres.length) return { error: 'sin cachÃ©: el Service Worker no llegÃ³ a activarse' };
+    if (!nombres.length) return { error: 'sin caché: el Service Worker no llegó a activarse' };
     let total = 0; const faltan = []; const nombres2 = [];
     for (const n of nombres) {
       const c = await caches.open(n);
@@ -243,27 +252,37 @@ try {
     }
     return { total, faltan, caches: nombres2 };
   `);
-  anotar('Todo lo precargado estÃ¡ guardado y sin errores',
+  anotar('Todo lo precargado está guardado y sin errores',
     cache && !cache.error && cache.faltan.length === 0,
     cache?.error ? cache.error
-      : `${cache.total} recursos${cache.faltan.length ? ' Â· FALLAN: ' + cache.faltan.slice(0, 5).join(', ') : ''}`);
-  if (cache?.caches) console.log(`      cachÃ©s: ${cache.caches.join(' Â· ')}`);
+      : `${cache.total} recursos${cache.faltan.length ? ' · FALLAN: ' + cache.faltan.slice(0, 5).join(', ') : ''}`);
+  if (cache?.caches) console.log(`      cachés: ${cache.caches.join(' · ')}`);
 
-  anotar('Ninguna peticiÃ³n del arranque devolviÃ³ 404', peticiones404.length === 0,
+  anotar('Ninguna petición del arranque devolvió 404', peticiones404.length === 0,
     peticiones404.slice(0, 4).join(' | ') || 'ninguna');
 
-  /* ---- 5. Sin conexiÃ³n: es la razÃ³n de ser de PANGEA -------------------- */
+  /* ---- 5. Sin conexión: es la razón de ser de PANGEA -------------------- */
   enLinea = false;
   await enviar('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
   await dormir(300);
+  const t1 = Date.now();
   await enviar('Page.reload', { ignoreCache: true });
-  await dormir(3500);
+  /* También aquí se espera a que arranque de verdad, en vez de dormir un rato
+     fijo y mirar: en una máquina cargada o con el disco lento, 3,5 segundos no
+     alcanzan y la prueba fallaba sin que hubiera nada roto. */
+  let sinRedArrancada = false;
+  let msSinRed = 0;
+  while (Date.now() - t1 < LIMITE) {
+    await dormir(250);
+    const s = await evaluar(`return { arrancando: document.documentElement.hasAttribute('data-booting'), barra: !!document.querySelector('#sidebar') };`).catch(() => null);
+    if (s && s.barra && !s.arrancando) { sinRedArrancada = true; msSinRed = Date.now() - t1; break; }
+  }
   const sinRed = await evaluar(`return {
     arrancando: document.documentElement.hasAttribute('data-booting'),
     barra: !!document.querySelector('#sidebar'),
   };`);
-  anotar('Sigue arrancando sin conexiÃ³n', sinRed.barra && !sinRed.arrancando,
-    `barra=${sinRed.barra} Â· cortina de arranque=${sinRed.arrancando ? 'SIGUE PUESTA' : 'quitada'}`);
+  anotar('Sigue arrancando sin conexión', sinRedArrancada && sinRed.barra && !sinRed.arrancando,
+    `arrancó en ${(msSinRed / 1000).toFixed(1)} s · barra=${sinRed.barra} · cortina de arranque=${sinRed.arrancando ? 'SIGUE PUESTA' : 'quitada'}`);
   await enviar('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
 
   anotar('Sin errores de JavaScript con la red disponible', errores.length === 0,
@@ -275,7 +294,7 @@ try {
   if (servidor) servidor.close();
 }
 
-/* â”€â”€ Resumen â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ���� Resumen ������������������������������������������������������������������������������������������������������������������������������ */
 
 const ok = resultados.filter((r) => r.ok).length;
 const fallos = resultados.filter((r) => !r.ok);
@@ -284,8 +303,8 @@ console.log(`  Despliegue en subcarpeta: ${ok}/${resultados.length} correctas`);
 console.log('='.repeat(70));
 if (fallos.length) {
   console.log('\n  FALLOS');
-  for (const f of fallos) console.log(`  âœ— ${f.nombre} â€” ${f.detalle}`);
-  console.log('\n  Publicarlo asÃ­ dejarÃ­a fallos que no se ven en la pantalla.\n');
+  for (const f of fallos) console.log(`  �S ${f.nombre} � ${f.detalle}`);
+  console.log('\n  Publicarlo así dejaría fallos que no se ven en la pantalla.\n');
 } else {
   console.log('\n  PANGEA sirve tal cual en una subcarpeta: se puede publicar sin tocar nada.\n');
 }
