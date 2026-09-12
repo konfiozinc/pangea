@@ -1,0 +1,23 @@
+{
+  "name": "pangea",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "PANGEA — El sistema operativo de la inteligencia colectiva humana. PWA local-first, offline-first y de código abierto.",
+  "keywords": ["pwa", "offline-first", "local-first", "collective-intelligence", "indigenous-languages", "emergency-response", "open-source", "decentralized-identity"],
+  "license": "MIT",
+  "homepage": "./index.html",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node tools/serve.mjs",
+    "serve": "node tools/serve.mjs --port 8188",
+    "audit": "node tools/audit.mjs",
+    "e2e": "node tools/e2e.mjs",
+    "subpath": "node tools/subpath.mjs",
+    "assets": "node tools/build-assets.mjs",
+    "check": "node tools/audit.mjs"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "comment": "PANGEA no tiene dependencias npm en tiempo de ejecución: todo se ejecuta en el navegador con APIs nativas y, opcionalmente, con bibliotecas cargadas por CDN y cacheadas por el Service Worker. Este archivo existe solo para declarar el tipo de módulo (ESM), habilitar `node --check` sobre los fuentes y exponer los comandos de auditoría y servidor local."
+}

@@ -1,0 +1,474 @@
+{
+  "version": 1,
+  "note": "Contenido semilla. Se carga UNA sola vez, en el primer arranque y solo si la colección está vacía, para que la red nunca aparezca vacía ante alguien que abre PANGEA por primera vez. Es material ilustrativo de demostración: los saberes y las palabras de lenguas originarias deben verificarse con hablantes nativos antes de usarse como referencia. Todo registro semilla se marca con seed:true y la interfaz lo muestra como «Demostración».",
+  "author": { "fingerprint": "PAN-SEED-0000-0000", "name": "PANGEA Semilla", "anon": false },
+  "collections": {
+    "problems": [
+      {
+        "id": "seed_pr_agua",
+        "title": "El agua de la red llega contaminada dos días por semana",
+        "body": "En nuestro barrio el agua llega turbia y con olor dos días por semana. Los análisis caseros muestran coliformes. Necesitamos un método de filtrado de bajo costo que cada familia pueda construir y mantener, y saber cómo verificar que el agua quedó segura antes de darla a los niños.",
+        "category": "agua",
+        "urgency": "high",
+        "lang": "es",
+        "tags": ["agua", "filtro", "salud infantil"],
+        "location": { "label": "Cali, Colombia", "lat": 3.4516, "lng": -76.532 },
+        "status": "abierto",
+        "createdAt": 1735689600000
+      },
+      {
+        "id": "seed_pr_salud",
+        "title": "Falta acompañamiento en partos en la zona rural",
+        "body": "La comunidad está a cuatro horas del puesto de salud más cercano. Las mujeres dan a luz con acompañamiento de vecinas sin formación. Buscamos personas con experiencia en partería dispuestas a formar a un grupo local y a dejar material de consulta para emergencias.",
+        "category": "salud",
+        "urgency": "critical",
+        "lang": "es",
+        "tags": ["partería", "salud materna", "rural"],
+        "location": { "label": "Cauca, Colombia", "lat": 2.4448, "lng": -76.6147 },
+        "status": "abierto",
+        "createdAt": 1735776000000
+      },
+      {
+        "id": "seed_pr_energia",
+        "title": "La escuela no tiene electricidad para las clases nocturnas",
+        "body": "Cuarenta adultos estudian de noche en la escuela del caserío y no hay luz. El tendido eléctrico llega a dos kilómetros. Necesitamos dimensionar e instalar una solución solar con baterías, y enseñar al menos a dos personas del lugar a mantenerla.",
+        "category": "energia",
+        "urgency": "medium",
+        "lang": "es",
+        "tags": ["solar", "educación de adultos"],
+        "location": { "label": "Alta Verapaz, Guatemala", "lat": 15.4716, "lng": -90.3736 },
+        "status": "abierto",
+        "createdAt": 1735862400000
+      },
+      {
+        "id": "seed_pr_alim",
+        "title": "Se pierde la mitad de la cosecha por falta de secado y almacenamiento",
+        "body": "Después de la cosecha de maíz y frijol, la humedad y los roedores arruinan cerca de la mitad del grano. Necesitamos un secador solar de bajo costo y una forma de almacenar sin químicos durante al menos seis meses.",
+        "category": "alimentacion",
+        "urgency": "high",
+        "lang": "es",
+        "tags": ["poscosecha", "secador solar", "almacenamiento"],
+        "location": { "label": "Chiapas, México", "lat": 16.7569, "lng": -93.1299 },
+        "status": "abierto",
+        "createdAt": 1735948800000
+      },
+      {
+        "id": "seed_pr_tec",
+        "title": "El registro de pacientes sigue en papel y se pierde",
+        "body": "El puesto de salud lleva las historias clínicas en cuadernos. Cuando se mojan o se traspapelan, se pierde el historial de años. Queremos digitalizarlo con algo que funcione sin internet y que después pueda compartirse entre puestos.",
+        "category": "tecnologia",
+        "urgency": "medium",
+        "lang": "es",
+        "tags": ["historia clínica", "offline", "software libre"],
+        "location": { "label": "Amazonas, Perú", "lat": -6.2294, "lng": -77.8717 },
+        "status": "abierto",
+        "createdAt": 1736035200000
+      },
+      {
+        "id": "seed_pr_ambiente",
+        "title": "El río se está secando por la deforestación en la cuenca alta",
+        "body": "Hace veinte años el río corría todo el año. Hoy baja tres meses. La causa es la tala en la parte alta de la cuenca. Buscamos apoyo técnico para restaurar las laderas, elegir especies nativas y lograr acuerdos con los propietarios de arriba.",
+        "category": "medioambiente",
+        "urgency": "high",
+        "lang": "es",
+        "tags": ["cuenca", "reforestación", "especies nativas"],
+        "location": { "label": "Valle de Bravo, México", "lat": 19.1953, "lng": -100.1314 },
+        "status": "abierto",
+        "createdAt": 1736121600000
+      }
+    ],
+    "capacities": [
+      {
+        "id": "seed_ca_filtro",
+        "title": "Diseño y construyo filtros cerámicos de bajo costo",
+        "body": "Llevo doce años construyendo filtros de cerámica con barro local, aserrín y plata coloidal. Enseño a cualquier persona a fabricarlos con materiales de su región en tres días de taller, incluyendo cómo probar el agua antes y después. Publico los planos y las proporciones de forma abierta.",
+        "category": "agua",
+        "lang": "es",
+        "tags": ["filtro cerámico", "taller", "planos abiertos"],
+        "availability": "disponible",
+        "location": { "label": "Puebla, México", "lat": 19.0414, "lng": -98.2063 },
+        "createdAt": 1736208000000
+      },
+      {
+        "id": "seed_ca_partera",
+        "title": "Soy partera con veinte años de experiencia y formo a otras",
+        "body": "He acompañado más de mil partos en zonas sin acceso a hospital. Puedo dar formación práctica de tres semanas, dejar un manual ilustrado de emergencias obstétricas y acompañar a distancia por teléfono cuando haya señal. Hablo español y nasa yuwe.",
+        "category": "salud",
+        "lang": "es",
+        "tags": ["partería", "formación", "emergencias obstétricas"],
+        "availability": "disponible",
+        "location": { "label": "Popayán, Colombia", "lat": 2.4448, "lng": -76.6147 },
+        "createdAt": 1736294400000
+      },
+      {
+        "id": "seed_ca_solar",
+        "title": "Instalo paneles solares y microredes comunitarias",
+        "body": "Trabajo con sistemas fotovoltaicos de 200 W a 5 kW, con baterías de litio y controladores de carga. Hago el dimensionamiento, la instalación y la capacitación de dos personas locales para el mantenimiento. Puedo viajar y llevar herramientas.",
+        "category": "energia",
+        "lang": "es",
+        "tags": ["solar", "microred", "capacitación"],
+        "availability": "disponible",
+        "location": { "label": "Ciudad de Guatemala", "lat": 14.6349, "lng": -90.5069 },
+        "createdAt": 1736380800000
+      },
+      {
+        "id": "seed_ca_secador",
+        "title": "Construyo secadores solares y silos de almacenamiento",
+        "body": "Diseño secadores solares de bandeja y silos metálicos herméticos de bajo costo para maíz y frijol. He instalado más de doscientos en cooperativas. Enseño el método de medición de humedad con sal y botella para saber cuándo el grano está listo para guardar.",
+        "category": "alimentacion",
+        "lang": "es",
+        "tags": ["secador solar", "silo", "humedad del grano"],
+        "availability": "disponible",
+        "location": { "label": "San Cristóbal de las Casas, México", "lat": 16.7370, "lng": -92.6376 },
+        "createdAt": 1736467200000
+      },
+      {
+        "id": "seed_ca_software",
+        "title": "Desarrollo software libre que funciona sin internet",
+        "body": "Construyo aplicaciones web offline-first sobre IndexedDB y sincronización manual por archivos, pensadas para puestos de salud y escuelas rurales. Puedo adaptar un registro de pacientes con historia clínica, y formar al personal en dos sesiones de tres horas.",
+        "category": "tecnologia",
+        "lang": "es",
+        "tags": ["offline-first", "historia clínica", "software libre"],
+        "availability": "busy",
+        "location": { "label": "Lima, Perú", "lat": -12.0464, "lng": -77.0428 },
+        "createdAt": 1736553600000
+      },
+      {
+        "id": "seed_ca_cuenca",
+        "title": "Restauro cuencas y viveros de especies nativas",
+        "body": "Trabajo en restauración de laderas con terrazas, barreras vivas y viveros comunitarios de especies nativas. Puedo hacer el diagnóstico de la cuenca, priorizar los sitios críticos y capacitar a un comité local para producir sus propias plantas durante años.",
+        "category": "medioambiente",
+        "lang": "es",
+        "tags": ["restauración", "vivero", "barreras vivas"],
+        "availability": "disponible",
+        "location": { "label": "Toluca, México", "lat": 19.2826, "lng": -99.6557 },
+        "createdAt": 1736640000000
+      },
+      {
+        "id": "seed_ca_lluvia",
+        "title": "Instalo captación de agua de lluvia en techos",
+        "body": "Diseño e instalo sistemas de captación de agua de lluvia con filtro de primeras aguas, cisterna y bomba manual. Un techo de sesenta metros cuadrados puede dar agua potable para una familia durante la temporada seca. Enseño el cálculo y el mantenimiento.",
+        "category": "agua",
+        "lang": "es",
+        "tags": ["captación de lluvia", "cisterna", "autonomía"],
+        "availability": "disponible",
+        "location": { "label": "Monterrey, México", "lat": 25.6866, "lng": -100.3161 },
+        "createdAt": 1736726400000
+      }
+    ],
+    "claims": [
+      {
+        "id": "seed_cl_1",
+        "text": "Los filtros cerámicos impregnados con plata reducen las bacterias del agua en más del 99 % en condiciones domésticas.",
+        "category": "agua",
+        "lang": "es",
+        "sources": [
+          { "title": "Estudios de filtros cerámicos de potabilización domiciliaria", "url": "https://www.who.int/publications" }
+        ],
+        "status": "abierta",
+        "createdAt": 1736812800000
+      },
+      {
+        "id": "seed_cl_2",
+        "text": "Un secador solar de bandeja reduce la humedad del maíz por debajo del 13 % en tres días de sol.",
+        "category": "alimentacion",
+        "lang": "es",
+        "sources": [],
+        "status": "abierta",
+        "createdAt": 1736899200000
+      },
+      {
+        "id": "seed_cl_3",
+        "text": "El acompañamiento continuo de una partera formada reduce la mortalidad materna en zonas sin acceso hospitalario.",
+        "category": "salud",
+        "lang": "es",
+        "sources": [
+          { "title": "Informe sobre partería y salud materna", "url": "https://www.unfpa.org/" }
+        ],
+        "status": "abierta",
+        "createdAt": 1736985600000
+      }
+    ],
+    "votes": [
+      {
+        "id": "seed_cl_1::PAN-SEED-0001-AA01",
+        "claimId": "seed_cl_1",
+        "voter": { "fingerprint": "PAN-SEED-0001-AA01", "name": "Taller de cerámica" },
+        "value": "true",
+        "evidence": "Llevamos doce años fabricando filtros de barro con plata coloidal y medimos el agua antes y después con kits de campo. La reducción bacteriana es consistente cuando el filtro está bien cocido e impregnado.",
+        "sources": [],
+        "lang": "es",
+        "at": 1737072000000,
+        "createdAt": 1737072000000
+      },
+      {
+        "id": "seed_cl_1::PAN-SEED-0002-AA02",
+        "claimId": "seed_cl_1",
+        "voter": { "fingerprint": "PAN-SEED-0002-AA02", "name": "Puesto de salud rural" },
+        "value": "true",
+        "evidence": "En nuestro puesto llevamos registro de casos de diarrea desde que se repartieron filtros cerámicos en sesenta familias. La incidencia bajó de forma clara durante los dos primeros años.",
+        "sources": [],
+        "lang": "es",
+        "at": 1737158400000,
+        "createdAt": 1737158400000
+      },
+      {
+        "id": "seed_cl_1::PAN-SEED-0003-AA03",
+        "claimId": "seed_cl_1",
+        "voter": { "fingerprint": "PAN-SEED-0003-AA03", "name": "Ingeniería sanitaria" },
+        "value": "true",
+        "evidence": "Coincide con la literatura revisada por pares sobre potabilización domiciliaria. El punto crítico no es el material sino el mantenimiento: sin cepillado periódico el rendimiento cae mucho a los pocos meses.",
+        "sources": [],
+        "lang": "es",
+        "at": 1737244800000,
+        "createdAt": 1737244800000
+      },
+      {
+        "id": "seed_cl_1::PAN-SEED-0004-AA04",
+        "claimId": "seed_cl_1",
+        "voter": { "fingerprint": "PAN-SEED-0004-AA04", "name": "Cooperativa de agua" },
+        "value": "true",
+        "evidence": "Lo verificamos en nuestra propia red comunitaria con muestras enviadas a un laboratorio municipal durante seis meses seguidos. Los resultados acompañan la afirmación.",
+        "sources": [],
+        "lang": "es",
+        "at": 1737331200000,
+        "createdAt": 1737331200000
+      },
+      {
+        "id": "seed_cl_1::PAN-SEED-0005-AA05",
+        "claimId": "seed_cl_1",
+        "voter": { "fingerprint": "PAN-SEED-0005-AA05", "name": "Docente de salud pública" },
+        "value": "true",
+        "evidence": "Es lo que enseñamos en el curso de agua y saneamiento, con la advertencia de que el porcentaje depende mucho de la turbidez del agua de entrada y del grosor de la pared del filtro.",
+        "sources": [],
+        "lang": "es",
+        "at": 1737417600000,
+        "createdAt": 1737417600000
+      },
+      {
+        "id": "seed_cl_1::PAN-SEED-0006-AA06",
+        "claimId": "seed_cl_1",
+        "voter": { "fingerprint": "PAN-SEED-0006-AA06", "name": "Química analítica" },
+        "value": "context",
+        "evidence": "La cifra del 99 % corresponde a ensayos controlados con agua de laboratorio. Con agua turbia o con materia orgánica disuelta el desempeño baja, así que conviene citar siempre la condición de ensayo.",
+        "sources": [],
+        "lang": "es",
+        "at": 1737504000000,
+        "createdAt": 1737504000000
+      },
+      {
+        "id": "seed_cl_2::PAN-SEED-0007-BB01",
+        "claimId": "seed_cl_2",
+        "voter": { "fingerprint": "PAN-SEED-0007-BB01", "name": "Cooperativa de frijol" },
+        "value": "true",
+        "evidence": "Con cielo despejado y volteo diario del grano medimos el paso por debajo del trece por ciento al tercer día, usando el método de la sal en el frasco como comprobación rápida en campo.",
+        "sources": [],
+        "lang": "es",
+        "at": 1737590400000,
+        "createdAt": 1737590400000
+      },
+      {
+        "id": "seed_cl_2::PAN-SEED-0008-BB02",
+        "claimId": "seed_cl_2",
+        "voter": { "fingerprint": "PAN-SEED-0008-BB02", "name": "Técnico poscosecha" },
+        "value": "true",
+        "evidence": "Es un orden de magnitud razonable en temporada seca. En temporada de lluvias puede tardar cinco o seis días y hay que proteger el secador por la noche para que no reabsorba humedad.",
+        "sources": [],
+        "lang": "es",
+        "at": 1737676800000,
+        "createdAt": 1737676800000
+      },
+      {
+        "id": "seed_cl_2::PAN-SEED-0009-BB03",
+        "claimId": "seed_cl_2",
+        "voter": { "fingerprint": "PAN-SEED-0009-BB03", "name": "Productor de maíz" },
+        "value": "false",
+        "evidence": "En nuestra zona, a mayor altitud y con nubes por la tarde, hicimos la prueba con el mismo modelo de secador y al tercer día el grano seguía por encima del quince por ciento. Tres días no es un plazo general.",
+        "sources": [],
+        "lang": "es",
+        "at": 1737763200000,
+        "createdAt": 1737763200000
+      },
+      {
+        "id": "seed_cl_2::PAN-SEED-0010-BB04",
+        "claimId": "seed_cl_2",
+        "voter": { "fingerprint": "PAN-SEED-0010-BB04", "name": "Agrónoma" },
+        "value": "context",
+        "evidence": "Depende de la carga del secador, del espesor de la capa de grano y de la humedad inicial de la cosecha. Sin fijar esas tres condiciones, cualquier plazo es una generalización.",
+        "sources": [],
+        "lang": "es",
+        "at": 1737849600000,
+        "createdAt": 1737849600000
+      },
+      {
+        "id": "seed_cl_3::PAN-SEED-0011-CC01",
+        "claimId": "seed_cl_3",
+        "voter": { "fingerprint": "PAN-SEED-0011-CC01", "name": "Red de parteras" },
+        "value": "true",
+        "evidence": "Llevamos veinte años acompañando partos en zonas sin carretera y llevamos el registro de cada traslado. La diferencia entre un acompañamiento continuo y uno intermitente se nota en los desenlaces.",
+        "sources": [],
+        "lang": "es",
+        "at": 1737936000000,
+        "createdAt": 1737936000000
+      },
+      {
+        "id": "seed_cl_3::PAN-SEED-0012-CC02",
+        "claimId": "seed_cl_3",
+        "voter": { "fingerprint": "PAN-SEED-0012-CC02", "name": "Epidemiología comunitaria" },
+        "value": "true",
+        "evidence": "Es consistente con los informes internacionales sobre partería, con el matiz de que el efecto depende de que exista una vía de referencia funcionando hacia un hospital cuando aparecen señales de alarma.",
+        "sources": [],
+        "lang": "es",
+        "at": 1738022400000,
+        "createdAt": 1738022400000
+      },
+      {
+        "id": "seed_cl_3::PAN-SEED-0013-CC03",
+        "claimId": "seed_cl_3",
+        "voter": { "fingerprint": "PAN-SEED-0013-CC03", "name": "Formación de parteras" },
+        "value": "true",
+        "evidence": "Lo comprobamos formando a dieciocho parteras en tres municipios y comparando los registros de derivación antes y después de la formación, no solo la mortalidad.",
+        "sources": [],
+        "lang": "es",
+        "at": 1738108800000,
+        "createdAt": 1738108800000
+      }
+    ],
+    "knowledge": [
+      {
+        "id": "seed_kn_1",
+        "title": "Cómo saber si el grano está seco sin instrumentos",
+        "kind": "recipe",
+        "content": "Se llena un frasco de vidrio hasta la mitad con el grano, se añade una cucharada de sal gruesa y se agita durante tres minutos. Si la sal se queda pegada en las paredes del frasco, el grano todavía tiene demasiada humedad y hay que seguir secándolo. Si la sal cae suelta al fondo, el grano está listo para almacenarse. Es un método que han usado varias generaciones de agricultores y no necesita ningún aparato.",
+        "category": "alimentacion",
+        "culture": "Comunidades campesinas de Mesoamérica",
+        "lang": "es",
+        "license": "cc-by-sa",
+        "tags": ["poscosecha", "maíz", "método tradicional"],
+        "createdAt": 1737072000000
+      },
+      {
+        "id": "seed_kn_2",
+        "title": "Barreras vivas con pasto de corte para frenar la erosión",
+        "kind": "text",
+        "content": "En laderas con pendiente fuerte se siembran hileras de pasto de corte siguiendo las curvas de nivel, separadas entre ocho y doce metros. Las raíces sujetan el suelo y la base de cada hilera atrapa la tierra que baja con la lluvia, formando con los años una terraza natural. Se corta el pasto para alimentar al ganado, de modo que la barrera también produce. Basta una jornada de trabajo por hectárea para establecerla, y se mantiene sola.",
+        "category": "medioambiente",
+        "culture": "Agricultura de ladera andina y centroamericana",
+        "lang": "es",
+        "license": "cc-by-sa",
+        "tags": ["erosión", "curvas de nivel", "suelo"],
+        "createdAt": 1737158400000
+      },
+      {
+        "id": "seed_kn_3",
+        "title": "Señales de peligro en el parto que exigen traslado inmediato",
+        "kind": "text",
+        "content": "Hay cinco señales que no admiten espera: sangrado que empapa más de una tela en una hora, dolor de cabeza intenso con visión borrosa, convulsiones, fiebre con escalofríos y líquido verde o con mal olor. En cualquiera de estos casos se debe trasladar a la madre al puesto de salud más cercano sin esperar a que amanezca. Mientras se espera el transporte: acostarla de lado, no darle nada por la boca, abrigarla y anotar la hora exacta en que empezó cada signo para informar al personal de salud.",
+        "category": "salud",
+        "culture": "Manuales de partería comunitaria",
+        "lang": "es",
+        "license": "cc-by-sa",
+        "tags": ["parto", "emergencia", "señales de alarma"],
+        "createdAt": 1737244800000
+      },
+      {
+        "id": "seed_kn_4",
+        "title": "Dimensionar un sistema solar doméstico en tres pasos",
+        "kind": "text",
+        "content": "Primero se hace la lista de aparatos con su potencia en vatios y las horas de uso al día; se multiplica y se suman los vatios-hora diarios. Segundo, se divide ese total entre las horas de sol útil de la región, que suelen ser entre cuatro y cinco, y se añade un treinta por ciento de margen: eso da la potencia del panel. Tercero, se multiplican los vatios-hora diarios por el número de días de autonomía deseado, normalmente dos, y se divide entre el voltaje del banco de baterías: eso da los amperios-hora necesarios. Con esos tres números cualquier persona puede comprar lo correcto sin que le vendan de más.",
+        "category": "energia",
+        "culture": "Instaladores comunitarios de energía solar",
+        "lang": "es",
+        "license": "cc-by-sa",
+        "tags": ["solar", "cálculo", "autonomía"],
+        "createdAt": 1737331200000
+      },
+      {
+        "id": "seed_kn_5",
+        "title": "Filtro cerámico: proporciones y prueba de seguridad",
+        "kind": "recipe",
+        "content": "Se mezcla arcilla tamizada con aserrín cernido en proporción de dos a uno en volumen y se amasa con agua hasta que sostenga la forma. Se moldea en un recipiente de paredes de un centímetro y medio y se deja secar a la sombra una semana antes de cocer. El aserrín se quema y deja los poros por donde pasa el agua. Después de la cocción se impregna con una solución de plata coloidal y se deja secar al sol. Para probarlo: se filtran dos litros de agua y se guardan en un frasco cerrado un día a temperatura ambiente; si aparece turbiedad o huele mal, el filtro no sirve y hay que repetir la impregnación.",
+        "category": "agua",
+        "culture": "Talleres de cerámica comunitaria",
+        "lang": "es",
+        "license": "cc-by-sa",
+        "tags": ["filtro", "cerámica", "prueba de agua"],
+        "createdAt": 1737417600000
+      }
+    ],
+    "vocab": [
+      {
+        "id": "seed_vc_1",
+        "word": "Yaku",
+        "meaning": "Agua",
+        "lang": "es",
+        "dialect": "Quechua sureño",
+        "speaker": "Comunidades quechuas andinas",
+        "createdAt": 1737504000000
+      },
+      {
+        "id": "seed_vc_2",
+        "word": "Ko",
+        "meaning": "Agua",
+        "lang": "es",
+        "dialect": "Mapudungun",
+        "speaker": "Pueblo mapuche",
+        "createdAt": 1737590400000
+      },
+      {
+        "id": "seed_vc_3",
+        "word": "Wüin",
+        "meaning": "Agua",
+        "lang": "es",
+        "dialect": "Wayuunaiki",
+        "speaker": "Pueblo wayuu",
+        "createdAt": 1737676800000
+      },
+      {
+        "id": "seed_vc_4",
+        "word": "Uma",
+        "meaning": "Agua",
+        "lang": "es",
+        "dialect": "Aymara",
+        "speaker": "Pueblo aimara",
+        "createdAt": 1737763200000
+      },
+      {
+        "id": "seed_vc_5",
+        "word": "Avati",
+        "meaning": "Maíz",
+        "lang": "es",
+        "dialect": "Guaraní",
+        "speaker": "Pueblo guaraní",
+        "createdAt": 1737849600000
+      },
+      {
+        "id": "seed_vc_6",
+        "word": "Ixim",
+        "meaning": "Maíz",
+        "lang": "es",
+        "dialect": "Maya yucateco",
+        "speaker": "Pueblo maya",
+        "createdAt": 1737936000000
+      },
+      {
+        "id": "seed_vc_7",
+        "word": "Tlalli",
+        "meaning": "Tierra, suelo",
+        "lang": "es",
+        "dialect": "Náhuatl",
+        "speaker": "Pueblos nahuas",
+        "createdAt": 1738022400000
+      },
+      {
+        "id": "seed_vc_8",
+        "word": "Yu'",
+        "meaning": "Agua",
+        "lang": "es",
+        "dialect": "Nasa Yuwe",
+        "speaker": "Pueblo nasa",
+        "createdAt": 1738108800000
+      }
+    ]
+  }
+}

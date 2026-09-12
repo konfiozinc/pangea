@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "note": "Registro canónico y legible por máquina de los idiomas de PANGEA, pensado para que otras implementaciones y para el Protocolo PANGEA (docs/PROTOCOLO-PANGEA.md) no tengan que deducirlos del código. `mm` es el código para la API MyMemory; `bcp` es la etiqueta BCP-47 usada por SpeechRecognition y SpeechSynthesis. La interfaz está traducida a 8 idiomas (js/locales/), mientras que el motor de traducción cubre 12. En tiempo de ejecución, js/modules/lingua.js lleva una constante equivalente en lugar de pedir este archivo por red: en una aplicación que promete funcionar sin conexión desde la primera carga, cada petición cuenta. Este archivo es la referencia; aquella constante es la copia operativa.",
+  "uiLanguages": ["es", "en", "pt", "fr", "ar", "hi", "zh", "ru"],
+  "translationLanguages": [
+    { "code": "es", "name": "Español", "native": "Español", "flag": "🇪🇸", "mm": "es-ES", "bcp": "es-ES", "dir": "ltr" },
+    { "code": "en", "name": "English", "native": "English", "flag": "🇬🇧", "mm": "en-GB", "bcp": "en-US", "dir": "ltr" },
+    { "code": "pt", "name": "Português", "native": "Português", "flag": "🇧🇷", "mm": "pt-BR", "bcp": "pt-BR", "dir": "ltr" },
+    { "code": "fr", "name": "Français", "native": "Français", "flag": "🇫🇷", "mm": "fr-FR", "bcp": "fr-FR", "dir": "ltr" },
+    { "code": "it", "name": "Italiano", "native": "Italiano", "flag": "🇮🇹", "mm": "it-IT", "bcp": "it-IT", "dir": "ltr" },
+    { "code": "de", "name": "Deutsch", "native": "Deutsch", "flag": "🇩🇪", "mm": "de-DE", "bcp": "de-DE", "dir": "ltr" },
+    { "code": "ar", "name": "Arabic", "native": "العربية", "flag": "🇸🇦", "mm": "ar-SA", "bcp": "ar-SA", "dir": "rtl" },
+    { "code": "hi", "name": "Hindi", "native": "हिन्दी", "flag": "🇮🇳", "mm": "hi-IN", "bcp": "hi-IN", "dir": "ltr" },
+    { "code": "zh", "name": "Chinese", "native": "中文", "flag": "🇨🇳", "mm": "zh-CN", "bcp": "zh-CN", "dir": "ltr" },
+    { "code": "ja", "name": "Japanese", "native": "日本語", "flag": "🇯🇵", "mm": "ja-JP", "bcp": "ja-JP", "dir": "ltr" },
+    { "code": "ru", "name": "Russian", "native": "Русский", "flag": "🇷🇺", "mm": "ru-RU", "bcp": "ru-RU", "dir": "ltr" },
+    { "code": "sw", "name": "Swahili", "native": "Kiswahili", "flag": "🇰🇪", "mm": "sw-KE", "bcp": "sw-KE", "dir": "ltr" }
+  ]
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>PANGEA</title>
+  <meta name="theme-color" content="#0A0E1A">
+  <meta name="robots" content="noindex">
+  <!--
+    Página de reserva para cuando se pide algo que no está guardado y no hay red.
+
+    Es deliberadamente AUTOCONTENIDA: estilos en línea y sin ninguna petición
+    externa. Se muestra justamente en la situación en la que el CSS, las fuentes
+    y los módulos podrían no estar disponibles, así que no puede depender de
+    ninguno de ellos. También es multilingüe por sí misma, porque no puede leer
+    la preferencia de idioma guardada en IndexedDB: elige por el idioma del
+    navegador y, si no lo reconoce, usa el español.
+  -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      display: grid; place-items: center; padding: 1.5rem;
+      background: #0A0E1A; color: #EAF0FF;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6; text-align: center;
+    }
+    main { max-width: 46ch; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+    .mark {
+      width: 76px; height: 76px; border-radius: 22px;
+      background: linear-gradient(115deg, #6366F1, #8B5CF6 26%, #06B6D4 62%, #10B981);
+      display: grid; place-items: center;
+      box-shadow: 0 18px 50px -18px rgba(99, 102, 241, .85);
+    }
+    h1 { font-size: 1.4rem; margin: 0; letter-spacing: -.015em; font-weight: 700; }
+    p { margin: 0; color: #93A0BC; font-size: .95rem; }
+    .actions { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; margin-top: .5rem; }
+    a.button {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .7rem 1.2rem; border-radius: 12px; text-decoration: none;
+      font-weight: 640; font-size: .9rem; min-height: 44px;
+    }
+    a.primary { background: #6366F1; color: #fff; }
+    a.secondary { background: rgba(255, 255, 255, .06); color: #EAF0FF; border: 1px solid #24314F; }
+    a.button:focus-visible { outline: 2px solid #7C7FF5; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M3.4 9h17.2M3.4 15h17.2M12 3c-2.5 2.6-3.8 5.6-3.8 9s1.3 6.4 3.8 9c2.5-2.6 3.8-5.6 3.8-9S14.5 5.6 12 3Z"></path>
+      </svg>
+    </div>
+
+    <h1 id="title">Sin conexión</h1>
+    <p id="body">PANGEA sigue funcionando. Esta pantalla aparece porque se pidió algo que no está guardado en este dispositivo.</p>
+
+    <div class="actions">
+      <a class="button primary" id="retry" href="./index.html">Volver a la aplicación</a>
+      <a class="button secondary" id="reload" href="./index.html" onclick="location.reload();return false;">↻</a>
+    </div>
+  </main>
+
+  <script>
+    /* Los tres textos en los ocho idiomas de la interfaz. Sin esta tabla, esta
+     * página tendría que pedir el diccionario por red — es decir, lo único que
+     * aquí no hay. */
+    var TEXT = {
+      es: ['Sin conexión', 'PANGEA sigue funcionando. Esta pantalla aparece porque se pidió algo que no está guardado en este dispositivo.', 'Volver a la aplicación'],
+      en: ['Offline', 'PANGEA keeps working. This screen appears because something was requested that is not stored on this device.', 'Back to the app'],
+      pt: ['Sem conexão', 'O PANGEA continua funcionando. Esta tela aparece porque se pediu algo que não está guardado neste dispositivo.', 'Voltar ao aplicativo'],
+      fr: ['Hors ligne', "PANGEA continue de fonctionner. Cet écran apparaît parce que quelque chose a été demandé qui n'est pas enregistré sur cet appareil.", "Revenir à l'application"],
+      ar: ['لا يوجد اتصال', 'يواصل PANGEA العمل. تظهر هذه الشاشة لأن شيئًا طُلب وهو غير محفوظ على هذا الجهاز.', 'العودة إلى التطبيق'],
+      hi: ['कनेक्शन नहीं है', 'PANGEA काम करता रहता है। यह स्क्रीन इसलिए दिख रही है क्योंकि ऐसा कुछ माँगा गया जो इस डिवाइस में सहेजा नहीं है।', 'ऐप पर वापस जाएँ'],
+      zh: ['没有连接', 'PANGEA 仍在运行。出现此屏幕是因为请求的内容没有保存在此设备上。', '返回应用'],
+      ru: ['Нет подключения', 'PANGEA продолжает работать. Этот экран появился потому, что запрошено то, чего нет на этом устройстве.', 'Вернуться в приложение'],
+    };
+    var RTL = { ar: true };
+
+    (function () {
+      var tags = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'es'];
+      var pick = 'en';
+      for (var i = 0; i < tags.length; i++) {
+        var code = String(tags[i]).slice(0, 2).toLowerCase();
+        if (TEXT[code]) { pick = code; break; }
+      }
+      var t = TEXT[pick];
+      document.documentElement.lang = pick;
+      document.documentElement.dir = RTL[pick] ? 'rtl' : 'ltr';
+      document.getElementById('title').textContent = t[0];
+      document.getElementById('body').textContent = t[1];
+      document.getElementById('retry').textContent = t[2];
+    })();
+  </script>
+</body>
+</html>

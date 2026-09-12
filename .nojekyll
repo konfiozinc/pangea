@@ -1,0 +1,9 @@
+Le dice a GitHub Pages que no procese esta carpeta con Jekyll.
+
+GitHub pasa por un generador de plantillas todo lo que publica, y ese generador
+ignora en silencio los archivos y carpetas cuyos nombres empiezan por guion bajo.
+Hoy PANGEA no tiene ninguno, así que este archivo no cambia nada — y por eso mismo
+conviene tenerlo: el día que alguien añada una carpeta `_algo`, desaparecería del
+sitio publicado sin ningún error y sin ninguna pista de por qué.
+
+Con este archivo vacío, lo que hay en la carpeta es exactamente lo que se publica.

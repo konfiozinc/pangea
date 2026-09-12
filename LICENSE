@@ -1,0 +1,60 @@
+MIT License
+
+Copyright (c) 2025 PANGEA Collective and contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+NOTA SOBRE EL CONTENIDO  ·  NOTE ON CONTENT
+================================================================================
+
+La licencia MIT de arriba se aplica al CÓDIGO FUENTE de PANGEA: los archivos
+HTML, CSS y JavaScript, la configuración, las herramientas de desarrollo y la
+documentación técnica.
+
+El CONTENIDO se licencia de forma distinta, y la distinción es deliberada:
+
+  · Los saberes, palabras, traducciones y datos semilla que acompañan al
+    proyecto (carpeta `data/`, diccionario vivo, archivo MEMORIA) se publican
+    bajo Creative Commons Atribución-CompartirIgual 4.0 Internacional
+    (CC BY-SA 4.0) — https://creativecommons.org/licenses/by-sa/4.0/deed.es
+
+  · Cada registro de contenido guarda además su propia licencia elegida por
+    quien lo aporta (CC BY, CC BY-SA, CC0 o todos los derechos reservados).
+    Esa elección prevalece sobre el valor por defecto anterior.
+
+  · El conocimiento tradicional de comunidades y pueblos originarios NO es
+    propiedad del proyecto. PANGEA solo lo custodia técnicamente. Su
+    titularidad moral y cultural pertenece a las comunidades que lo generaron,
+    y cualquier uso debe acordarse con ellas. Los datos semilla incluidos son
+    material ILUSTRATIVO de demostración y deben validarse con hablantes
+    nativos antes de tomarse como referencia.
+
+  · La especificación abierta descrita en `docs/PROTOCOLO-PANGEA.md` se cede
+    al dominio público para que cualquier implementación pueda adoptarla sin
+    permiso, sin atribución obligatoria y sin coste.
+
+--------------------------------------------------------------------------------
+The MIT license above covers the SOURCE CODE. Content is licensed separately
+under CC BY-SA 4.0, and traditional knowledge remains the cultural property of
+the communities that generated it. The seed data shipped with the project is
+illustrative and must be validated with native speakers before being treated
+as a reference. The open specification is released into the public domain so
+that any implementation may adopt it freely.
+================================================================================

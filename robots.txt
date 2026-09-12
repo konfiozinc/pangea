@@ -1,0 +1,28 @@
+# PANGEA · robots.txt
+#
+# PANGEA es una aplicación que funciona sin conexión y sin servidores: cada
+# dispositivo sirve la suya desde su propia caché. Aun así, publicar un
+# robots.txt válido importa por dos razones concretas.
+#
+#  1. Sin este archivo, muchos servidores estáticos devuelven la página
+#     principal ante cualquier ruta inexistente, y un rastreador que pida
+#     /robots.txt recibe HTML donde espera reglas. Eso se cuenta como error y
+#     perjudica la indexación.
+#  2. Aquí se decide explícitamente qué se puede rastrear. Nada de lo que hay
+#     en este proyecto es privado —todo vive en el dispositivo de cada
+#     persona—, así que se permite indexar la documentación y se excluyen las
+#     herramientas internas, que no aportan nada a quien busca ayuda.
+
+User-agent: *
+Allow: /
+Allow: /docs/
+Allow: /data/
+
+# Herramientas de desarrollo: no son contenido para visitantes.
+Disallow: /tools/
+
+# Parámetros de prueba del arnés de extremo a extremo.
+Disallow: /*?lighthouse=
+
+# Sin mapa del sitio todavía: el proyecto es una sola aplicación de una página.
+# Cuando exista documentación extensa se añadirá Sitemap: con su URL absoluta.

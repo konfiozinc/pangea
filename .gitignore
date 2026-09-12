@@ -1,0 +1,31 @@
+# Archivos que no deben versionarse
+
+# Dependencias (PANGEA no tiene ninguna en tiempo de ejecución; esta línea
+# existe por si alguien añade herramientas de desarrollo)
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Sistema operativo y editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# Registros y volcados temporales
+*.log
+npm-debug.log*
+*.tmp
+
+# Capturas generadas por `node tools/e2e.mjs --shots .capturas`
+.capturas/
+
+# Recursos regenerables con `node tools/build-assets.mjs`
+# Se versionan de todas formas, porque la aplicación debe funcionar recién
+# clonada y sin conexión. Descomenta si prefieres generarlos en cada compilación.
+# assets/icons/*.png
+# assets/fonts/*.woff2
+# css/fonts.css

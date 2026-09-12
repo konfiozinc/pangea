@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "note": "Taxonomía compartida por todos los módulos. El identificador `id` es estable y establece la clave de traducción `cat.<id>` en js/locales/*.js. Los iconos corresponden a claves de ICON_PATHS en js/utils.js.",
+  "categories": [
+    { "id": "salud", "icon": "heart", "color": "#EF4444" },
+    { "id": "alimentacion", "icon": "seedling", "color": "#10B981" },
+    { "id": "agua", "icon": "layers", "color": "#06B6D4" },
+    { "id": "energia", "icon": "bolt", "color": "#F59E0B" },
+    { "id": "educacion", "icon": "book", "color": "#6366F1" },
+    { "id": "vivienda", "icon": "home", "color": "#8B5CF6" },
+    { "id": "medioambiente", "icon": "globe", "color": "#22C55E" },
+    { "id": "tecnologia", "icon": "bot", "color": "#3B82F6" },
+    { "id": "transporte", "icon": "map", "color": "#0EA5E9" },
+    { "id": "economia", "icon": "balance", "color": "#14B8A6" },
+    { "id": "cultura", "icon": "flag", "color": "#EC4899" },
+    { "id": "emergencia", "icon": "sos", "color": "#DC2626" },
+    { "id": "justicia", "icon": "balance", "color": "#7C3AED" },
+    { "id": "conocimiento", "icon": "microscope", "color": "#0891B2" }
+  ]
+}

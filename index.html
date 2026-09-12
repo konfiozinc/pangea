@@ -1,166 +1,171 @@
-¡Excelente iniciativa! Contar con una plantilla base unificada (Index Maestro) y un prompt de ingeniería estructurado es la única forma de garantizar que cualquier Inteligencia Artificial posterior replique el chasis tipo App Premium, respete las safe-areas y erradique por completo el antipatrón de scroll infinito o la "landingización" del producto.  
-DOCX
-
-A continuación, te entrego el paquete maestro oficial bajo los estándares de calidad del Expediente Técnico Maestro V2.0 de KONFÍO ZINC:  
-DOCX
-
-🛠️ PARTE 1: El Index Maestro Universal (Estructura Limpia)
-Guarda este código bajo el nombre de modelo-maestro.html. Sirve como el molde de chasis móvil rígido. Cuenta con los 12 módulos requeridos por la arquitectura.  
-DOCX
-
-HTML
 <!DOCTYPE html>
-<html lang="es" class="h-full bg-slate-950 select-none">
+<html lang="es" data-booting>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <meta name="theme-color" content="<!-- TOKEN: COLOR_PRIMARIO -->"/>
-    <title><!-- VARIABLES: NOMBRE_CLIENTE --> - Tarjeta Digital Profesional</title>
-    
-    <!-- Framework CSS & Iconografía Oficial -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>PANGEA · Coordinación real, también sin conexión</title>
 
-    
-<link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Herramientas de coordinación para donde no llega la red: un puesto de salud a cuatro horas del hospital, un comité de agua, una escuela rural, una brigada de rescate. Traducción, emparejamiento entre problemas y capacidades, verificación por consenso, archivo del conocimiento y alertas que viajan sin internet. Sin servidores, sin cuentas y sin rastreo.">
+  <meta name="author" content="PANGEA Collective">
+  <meta name="theme-color" content="#FAFBFF">
+  <meta name="color-scheme" content="light dark">
+  <meta name="application-name" content="PANGEA">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="index, follow">
 
+  <!-- Sin rastreadores, sin analítica de terceros, sin cuentas. -->
+  <meta http-equiv="Permissions-Policy" content="geolocation=(self), microphone=(self), camera=(self), interest-cohort=()">
 
+  <!-- Open Graph / compartir -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PANGEA · Coordinación real, también sin conexión">
+  <meta property="og:description" content="Para comunidades donde una llamada no llega. Funciona sin servidores, sin cuentas y sin conexión: las alertas viajan como archivo firmado por USB, Bluetooth, radio o mensaje de texto.">
+  <meta property="og:image" content="assets/icons/icon-512.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="PANGEA">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- Tipografía auto-alojada: cero peticiones a terceros (css/fonts.css lo
+       genera tools/build-assets.mjs). Si no existe, el sistema provee la
+       reserva declarada en css/base.css y nada se rompe. -->
+  <link rel="stylesheet" href="css/fonts.css">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/modules.css">
+
+  <!-- Bibliotecas opcionales: si no cargan (por ejemplo, sin conexión la
+       primera vez), cada módulo degrada con elegancia a su modo local. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
+
+  <style>
+    /* Arranque: evita el destello de contenido sin estilo antes de que
+       el CSS crítico esté aplicado. Se retira cuando la app está lista. */
+    html[data-booting] body { overflow: hidden; }
+    #boot {
+      position: fixed; inset: 0; z-index: 9999;
+      display: grid; place-items: center; gap: 1.5rem;
+      background: #FAFBFF; color: #0B1220;
+      font-family: 'Inter', system-ui, sans-serif;
+      transition: opacity .45s ease, visibility .45s ease;
+    }
+    /* La pantalla de arranque es una CORTINA, no un fondo: si no se retira,
+     * la aplicación entera queda detrás de una capa opaca. Este es el único
+     * punto del proyecto donde un olvido deja la interfaz invisible sin
+     * producir un solo error, así que la regla vive junto al propio elemento
+     * y no depende de que JavaScript se acuerde de quitarlo. */
+    html:not([data-booting]) #boot { opacity: 0; visibility: hidden; pointer-events: none; }
+    html[data-theme='dark'] #boot, html:not([data-theme]) #boot { background: #0A0E1A; color: #EAF0FF; }
+    @media (prefers-color-scheme: light) { html:not([data-theme]) #boot { background: #FAFBFF; color: #0B1220; } }
+    #boot .mark {
+      width: 76px; height: 76px; border-radius: 22px;
+      background: linear-gradient(115deg, #6366F1, #8B5CF6 26%, #06B6D4 62%, #10B981);
+      display: grid; place-items: center;
+      box-shadow: 0 18px 50px -18px rgba(99,102,241,.85);
+      animation: boot-pulse 2.4s cubic-bezier(.22,.61,.36,1) infinite;
+    }
+    #boot .word { font-size: 1.6rem; font-weight: 800; letter-spacing: .22em; }
+    #boot .line { font-size: .78rem; opacity: .62; max-width: 30ch; text-align: center; line-height: 1.5; }
+    #boot .bar { width: 148px; height: 3px; border-radius: 99px; background: rgba(127,140,170,.28); overflow: hidden; }
+    #boot .bar i { display: block; height: 100%; width: 40%; border-radius: 99px;
+      background: linear-gradient(115deg, #6366F1, #06B6D4, #10B981); animation: boot-slide 1.3s cubic-bezier(.22,.61,.36,1) infinite; }
+    @keyframes boot-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+    @keyframes boot-slide { 0% { transform: translateX(-110%); } 100% { transform: translateX(370%); } }
+    @media (prefers-reduced-motion: reduce) { #boot .mark, #boot .bar i { animation: none; } }
+    .noscript { max-width: 62ch; margin: 12vh auto; padding: 2rem; font-family: system-ui, sans-serif; line-height: 1.65; }
+  </style>
 </head>
-<body class="bg-slate-950 w-full flex justify-center items-center overflow-hidden">
 
-    <!-- 1. MODULO: SPLASH SCREEN -->
-    <div id="splash" class="fixed inset-0 bg-slate-950 flex flex-col items-center justify-center z-[9999] transition-opacity duration-400">
-        <div class="text-center animate-pulse">
-            <div class="w-20 h-20 mx-auto bg-white rounded-full flex items-center justify-center shadow-2xl border-4 mb-3">
-                <i class="fas id-icono-splash text-3xl"></i>
-            </div>
-            <h1 class="text-2xl font-black text-white tracking-wider"><!-- VARIABLES: NOMBRE_COMERCIAL --></h1>
-        </div>
+<body>
+  <a class="skip-link" href="#main" data-i18n="a11y.skip">Ir al contenido principal</a>
+
+  <!-- Pantalla de arranque -->
+  <div id="boot" role="status" aria-live="polite">
+    <div class="mark">
+      <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M3.4 9h17.2M3.4 15h17.2M12 3c-2.5 2.6-3.8 5.6-3.8 9s1.3 6.4 3.8 9c2.5-2.6 3.8-5.6 3.8-9S14.5 5.6 12 3Z"></path>
+      </svg>
     </div>
+    <div class="word">PANGEA</div>
+    <div class="bar"><i></i></div>
+    <div class="line" data-i18n="app.loading">Iniciando el tejido cognitivo…</div>
+  </div>
 
-    <!-- CHASIS APP PREMIUM FIJA (MANDATORIO: SIN SCROLL DE FONDO) -->
-    <div class="app-container w-full max-w-[380px] bg-slate-900 relative flex flex-col justify-between overflow-hidden shadow-2xl">
-        
-        <!-- CONTENIDO INTERNO DE PANTALLA -->
-        <div class="flex-grow flex flex-col justify-between pb-24 overflow-y-auto">
-            
-            <!-- 2. MODULO: PORTADA & HERO -->
-            <header class="relative bg-gradient-to-b from-slate-800 to-slate-900 pt-6 pb-6 px-5 text-center text-white rounded-b-[40px] shadow-2xl flex-shrink-0">
-                <div class="absolute top-3 right-4 bg-white/10 text-white font-bold px-2.5 py-0.5 rounded-full text-[8px] uppercase">
-                    <!-- VARIABLES: BADGE_CONVERTIDOR -->
-                </div>
-                
-                <h2 class="text-3xl font-black text-white mt-2 tracking-tight"><!-- VARIABLES: TITULO_PRINCIPAL --></h2>
-                <p class="text-xs font-medium opacity-80 mt-0.5"><!-- VARIABLES: SUBTITULO_ROL --></p>
-                
-                <!-- ZONA CENTRAL DE SEGURIDAD DEL LOGO (EVITA DESBORDES) -->
-                <div class="w-24 h-24 mx-auto bg-white rounded-full flex flex-col items-center justify-center border-4 wow-profile p-0.5 my-3 shadow-lg block overflow-hidden relative">
-                    <img src="<!-- VARIABLE: RUTA_LOGOTIPO -->" alt="Logo" class="w-full h-full object-cover rounded-full">
-                </div>
-                
-                <div class="bg-black/30 rounded-xl p-2 max-w-[240px] mx-auto shadow-inner">
-                    <span class="text-[9px] block text-white/90 font-medium"><!-- VARIABLES: ESLOGAN_REQUISITOS --></span>
-                </div>
-            </header>
-
-            <!-- CONTENIDO CENTRAL OPERATIVO -->
-            <div class="px-5 space-y-3.5 flex-grow flex flex-col justify-center mt-2">
-                
-                <!-- 3. MODULO: BOTONES RÁPIDOS / CTA DE ALTA CONVERSIÓN -->
-                <div class="fade-in-up">
-                    <a href="https://wa.me/<!-- VARIABLE_NUMERO -->?text=<!-- TEXTO_ENCODED -->" target="_blank" class="w-full flex items-center justify-center bg-[#25D366] text-white font-black py-3.5 px-4 rounded-xl text-center text-xs uppercase tracking-wider transition-transform transform active:scale-95 pulse-whatsapp">
-                        <i class="fab fa-whatsapp text-xl mr-2 text-white"></i><!-- VARIABLES: ETIQUETA_WHATSAPP -->
-                    </a>
-                </div>
-
-                <!-- 5. MODULO: SERVICIOS RESUMIDOS (GLASSMORPHISM CARDS) -->
-                <div class="grid grid-cols-2 gap-2">
-                    <div class="bg-white/5 border border-white/10 p-2.5 rounded-xl flex items-center gap-2">
-                        <div class="w-6 h-6 bg-white/10 rounded-lg flex items-center justify-center text-white text-xs flex-shrink-0 shadow-inner"><i class="fas fa-check"></i></div>
-                        <span class="text-[10px] font-bold text-slate-300 leading-tight"><!-- TEXTO_SERVICIO --></span>
-                    </div>
-                </div>
-
-                <!-- ENLACES DE LLAMADA TELEFÓNICA -->
-                <div class="grid grid-cols-2 gap-2">
-                    <a href="tel:<!-- NUMERO -->" class="bg-white/5 border border-white/10 py-2.5 px-2 rounded-xl flex items-center justify-center gap-1.5 text-[10px] font-bold text-white transition-colors hover:bg-white/10">
-                        <i class="fas fa-phone"></i> Llamar Línea 1
-                    </a>
-                </div>
-            </div>
-            
-            <!-- 11. MODULO: CTA ACCIONES COMPLEMENTARIAS -->
-            <div class="px-5 mt-auto pt-2">
-                <button id="btn-vcard" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 text-xs uppercase tracking-wider border border-white/5 shadow-md">
-                    <i class="fas fa-address-card"></i> Guardar Contacto en Agenda
-                </button>
-            </div>
-        </div>
-
-        <!-- 4 y 12. MODULO: BARRA DE NAVEGACIÓN INFERIOR & PIE DE TARJETA ACTUALIZADO -->
-        <div class="absolute bottom-0 inset-x-0 bg-slate-950 border-t border-white/5 z-20 flex flex-col">
-            <nav class="px-2 py-2 flex justify-around items-center">
-                <button id="nav-services" class="flex flex-col items-center justify-center text-slate-500 hover:text-white w-12 transition-colors">
-                    <i class="fas fa-briefcase text-base"></i><span class="text-[9px] font-bold mt-1">Servicios</span>
-                </button>
-                <button id="nav-gallery" class="flex flex-col items-center justify-center text-slate-400 hover:text-white w-12 transition-colors">
-                    <i class="fas fa-images text-base"></i><span class="text-[9px] font-bold mt-1">Galería</span>
-                </button>
-                <button id="nav-testimonials" class="flex flex-col items-center justify-center text-slate-400 hover:text-white w-12 transition-colors">
-                    <i class="fas fa-comment-dots text-base"></i><span class="text-[9px] font-bold mt-1">Opiniones</span>
-                </button>
-                <button id="nav-coverage" class="flex flex-col items-center justify-center text-slate-400 hover:text-white w-12 transition-colors">
-                    <i class="fas fa-map-location-dot text-base"></i><span class="text-[9px] font-bold mt-1">Zonas</span>
-                </button>
-                <button id="nav-share" class="flex flex-col items-center justify-center text-slate-400 hover:text-white w-12 transition-colors">
-                    <i class="fas fa-qrcode text-base"></i><span class="text-[9px] font-bold mt-1">QR</span>
-                </button>
-            </nav>
-            <!-- SELLO OFICIAL DE MARCA MANDATORIO V2.0 -->
-            <div class="text-center text-[8px] tracking-wider text-slate-600 font-medium bg-slate-950 pb-1 uppercase">
-                Creado por KONFÍO ZINC — Todos los derechos reservados
-            </div>
-        </div>
+  <noscript>
+    <div class="noscript">
+      <h1>PANGEA necesita JavaScript</h1>
+      <p>Toda la inteligencia de PANGEA —el motor de emparejamiento, la
+      verificación por consenso, la traducción, las firmas criptográficas—
+      se ejecuta dentro de tu navegador, en tu propio dispositivo. Sin
+      JavaScript no hay nada que ejecutar, y ese es justamente el precio de
+      que nadie más tenga que ejecutarlo por ti.</p>
+      <p><strong>PANGEA no necesita servidores, pero sí necesita tu navegador.</strong>
+      Actívalo y vuelve a cargar la página.</p>
     </div>
+  </noscript>
 
-    <!-- ELEMENTOS EMERGENTES MODULARES -->
-    <div id="modal-services" class="modal-overlay"><div class="modal-content overflow-hidden"><div class="p-4 bg-slate-800 text-white font-bold text-xs uppercase flex justify-between"><span>Servicios</span><button class="close-modal">&times;</button></div><div class="p-4 max-h-[60vh] overflow-y-auto space-y-3 text-slate-800"><!-- INFO --></div></div></div>
-    <div id="modal-gallery" class="modal-overlay"><div class="modal-content overflow-hidden"><div class="p-4 bg-slate-800 text-white font-bold text-xs uppercase flex justify-between"><span>Evidencia</span><button class="close-modal">&times;</button></div><div class="p-4"><!-- SWIPER / EMBED --></div></div></div>
-    <div id="modal-testimonials" class="modal-overlay"><div class="modal-content overflow-hidden"><div class="p-4 bg-slate-800 text-white font-bold text-xs uppercase flex justify-between"><span>Opiniones</span><button class="close-modal">&times;</button></div><div class="p-4 space-y-3 text-slate-800"><!-- TESTIMONIOS --></div></div></div>
-    <div id="modal-coverage" class="modal-overlay"><div class="modal-content overflow-hidden"><div class="p-4 bg-slate-800 text-white font-bold text-xs uppercase flex justify-between"><span>Información</span><button class="close-modal">&times;</button></div><div class="p-4 text-slate-800"><!-- COBERTURA --></div></div></div>
-    <div id="modal-qr" class="modal-overlay"><div class="modal-content overflow-hidden"><div class="p-4 bg-slate-800 text-white font-bold text-xs uppercase flex justify-between"><span>Código QR</span><button class="close-modal">&times;</button></div><div class="p-5 text-center"><div id="qrcode" class="mx-auto inline-block"></div></div></div></div>
+  <!-- ===================== ARMAZÓN DE LA APLICACIÓN ====================== -->
+  <div class="app" id="app">
+    <!-- Barra lateral: colapsable en escritorio, cajón en móvil -->
+    <aside class="app-sidebar" id="sidebar" aria-label="PANGEA"></aside>
 
-    <div class="toast" id="toast"></div>
+    <!-- Cabecera contextual -->
+    <header class="app-topbar" id="topbar"></header>
 
-    
-<script src="scripts.js"></script>
+    <!-- Contenido de la vista activa -->
+    <main class="app-main" id="main" tabindex="-1">
+      <div id="view"></div>
+    </main>
+  </div>
 
+  <!-- Navegación inferior (móvil) -->
+  <nav class="app-bottomnav" id="bottomnav" aria-label="Navegación principal"></nav>
+
+  <!-- Velo del cajón lateral -->
+  <button class="drawer-scrim" id="drawer-scrim" aria-label="Cerrar menú" tabindex="-1"></button>
+
+  <!-- Notificaciones -->
+  <div class="toasts" id="toasts" role="status" aria-live="polite" aria-atomic="false"></div>
+
+  <!-- ============================ SCRIPTS =============================== -->
+  <!-- Bibliotecas opcionales desde CDN. Cada módulo comprueba su existencia
+       antes de usarlas, de modo que su ausencia nunca rompe la aplicación. -->
+  <script defer src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/minisearch@7.1.0/dist/umd/index.js" crossorigin="anonymous"></script>
+
+  <!-- Arranque de la PWA. El registro del Service Worker se hace aparte para
+       que la app siga funcionando aunque el navegador no lo soporte. -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('service-worker.js', { scope: './' }).then(function (reg) {
+          reg.addEventListener('updatefound', function () {
+            var sw = reg.installing;
+            if (!sw) return;
+            sw.addEventListener('statechange', function () {
+              if (sw.state === 'installed' && navigator.serviceWorker.controller) {
+                navigator.serviceWorker.controller.postMessage({ type: 'SW_UPDATED_CHECK' });
+              }
+            });
+          });
+        }).catch(function (err) {
+          console.warn('[pangea] Service Worker no registrado:', err && err.message);
+        });
+      });
+    }
+  </script>
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
-
-📋 PARTE 2: Prompt Maestro para la Inyección de Otras IAs
-Dale esta instrucción exacta a cualquier otra IA (ChatGPT, Claude, DeepSeek) junto con el archivo base y el volante del cliente para clonar los resultados perfectamente sin fallas en el logo o en la responsividad:
-
-Plaintext
-ACTÚA COMO INGENIERO FRONTEND SENIOR Y DISEÑADOR DE PRODUCTO MOBILE-FIRST BAJO LAS MÁXIMAS DIRECTRICES DEL "FRAMEWORK KONFÍO ZINC V2.0".
-
-TU OBJETIVO:
-Personalizar el archivo "index.html" adjunto utilizando estrictamente la información comercial del cliente provista. No crees una Landing Page, no agregues secciones adicionales y no habilites scroll infinito en el body. El archivo final debe emular una App Nativa móvil autocontenida de pantalla fija (Viewport Height bloqueado).
-
-REGLAS DE INGENIERÍA INVARIABLES (NO NEGOCIABLES):
-1. POSICIONAMIENTO CENTRAL DE SEGURIDAD: El contenedor circular blanco destinado para el logotipo o retrato del cliente debe colocarse OBLIGATORIAMENTE en el centro jerárquico del código HTML de la cabecera (debajo del título/nombre y encima del bloque del precio/eslogan). Esto evita que la presión de renderizado móvil lo expulse del Viewport.
-2. CERO OPACIDADES OCULTAS: Queda estrictamente prohibido utilizar clases CSS como "opacity-0" o "fade-in-up" en el contenedor del logotipo o retrato. El logo debe renderizarse de forma directa y forzada desde el primer milisegundo sin depender de librerías externas de animación (AOS).
-3. COLOR OFICIAL DE WHATSAPP: El botón de conversión principal de WhatsApp debe configurarse obligatoriamente con su color de identidad corporativa oficial (#25D366), usando la clase "pulse-whatsapp" para inyectar el efecto dinámico.
-4. DIRECCIONAMIENTO DINÁMICO DE PRODUCCIÓN: La lógica del generador de código QR y de la descarga de tarjeta de contactos corporativa vCard (.vcf) debe leer la URL activa mediante "window.location.href" para garantizar compatibilidad total en producción con el entorno de GitHub Pages.
-5. ARQUITECTURA DE CONTENIDO FLUIDA: Los módulos extensos de Servicios, Galerías, Testimonios e Información de ubicación deben inyectarse exclusivamente dentro de las estructuras "modal-content" asignadas, mapeando sus disparadores a la barra de menú fija inferior.
-
-RESTRICCIÓN DE SALIDA:
-Entrega el código de producción "index.html" limpio, completo y 100% funcional. No uses pseudocódigo, no omitas secciones internas ni uses comentarios del tipo "// El resto del código sigue igual".
-Con este set completo de herramientas, mantendrás un gobierno de producto milimétrico y estandarizado en todo tu catálogo de producción. ¡Listo para ser replicado en cascada!  
-DOCX

@@ -1,0 +1,22 @@
+# PANGEA · cómo se guardan los archivos en el repositorio
+#
+# Todo el texto se guarda con saltos de línea LF, aunque se edite en Windows.
+# Sin esta regla, quien colabore desde Windows y quien lo haga desde Linux o Mac
+# aparecen como autores de cambios en archivos enteros —porque cada línea cambió
+# de terminación— y los cambios de verdad quedan enterrados entre el ruido.
+* text=auto eol=lf
+
+# Los binarios no se tocan ni se convierten. Convertir una fuente o un icono
+# los corrompe, y el fallo aparece mucho después, cuando ya nadie relaciona la
+# causa con el efecto.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.wav binary
+*.mp3 binary
+*.ogg binary
