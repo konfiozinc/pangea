@@ -41,6 +41,11 @@ const SHELL = [
   './js/engine.js',
   './js/utils.js',
 
+  /* La ficha va ANTES que los módulos, y es la más importante de todas: app.js
+   * la importa siempre, así que si falta, la aplicación no arranca. Los módulos
+   * se cargan al entrar en cada pantalla, pero se precargan igualmente aquí
+   * para que estén disponibles sin conexión desde la primera visita. */
+  './js/modules/manifest.js',
   './js/modules/simple.js',
   './js/modules/lingua.js',
   './js/modules/synapse.js',

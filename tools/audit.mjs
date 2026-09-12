@@ -64,7 +64,10 @@ const REQUIRED_KEYS = ['id', 'icon', 'accent', 'titleKey', 'subKey', 'mount'];
 
 async function checkModules() {
   const dir = p('js', 'modules');
-  const files = (await readdir(dir)).filter((f) => f.endsWith('.js'));
+  /* `manifest.js` vive en esta carpeta pero NO es un módulo: es la ficha con el
+   * nombre, el icono y el color de cada uno. Se excluye del contrato porque no
+   * tiene `mount` ni debe tenerlo. */
+  const files = (await readdir(dir)).filter((f) => f.endsWith('.js') && f !== 'manifest.js');
   const found = [];
   for (const f of files) {
     const src = await readFile(join(dir, f), 'utf8');
@@ -88,11 +91,66 @@ async function checkModules() {
   if (!found.length && files.length) fail('Contrato de módulos', 'ningún módulo válido');
   else ok('Contrato de módulos', `${found.length} módulos: ${found.join(', ')}`);
 
-  /* El router los importa: deben existir todos. */
+  /* Los módulos se cargan bajo demanda desde la ficha. Se comprueban dos cosas:
+   * que el archivo de cada ficha exista, y —lo más importante— que la ficha
+   * diga lo mismo que el módulo sobre sí mismo. La ficha duplica el id, el
+   * icono y los textos de cada módulo, y una duplicación sin vigilancia se
+   * separa tarde o temprano: un día el menú mostraría un nombre viejo. */
+  const manifest = await readFile(p('js', 'modules', 'manifest.js'), 'utf8');
+  const fichas = [...manifest.matchAll(/id:\s*'([^']+)'[^}]*?file:\s*'([^']+)'/g)]
+    .map((m) => ({ id: m[1], file: m[2] }));
+  if (!fichas.length) {
+    fail('Ficha de módulos', 'no se pudo leer ninguna entrada de js/modules/manifest.js');
+  } else {
+    const sinArchivo = fichas.filter((f) => !files.includes(f.file));
+    sinArchivo.length
+      ? fail('Ficha de módulos', `apuntan a archivos que no existen: ${sinArchivo.map((f) => f.file).join(', ')}`)
+      : ok('Ficha de módulos', `${fichas.length} entradas: ${fichas.map((f) => f.id).join(', ')}`);
+
+    /* Cada módulo declara su propio id, icono y claves de texto: deben coincidir
+     * con la ficha, o el menú y el módulo estarán contando cosas distintas. */
+    const desajustes = [];
+    for (const ficha of fichas) {
+      if (!files.includes(ficha.file)) continue;
+      const src = await readFile(join(dir, ficha.file), 'utf8');
+      const bloque = src.slice(src.indexOf('export default'), src.indexOf('export default') + 900);
+      const suyos = {
+        id: (bloque.match(/\bid:\s*'([^']+)'/) || [])[1],
+        icon: (bloque.match(/\bicon:\s*'([^']+)'/) || [])[1],
+        accent: (bloque.match(/\baccent:\s*'([^']+)'/) || [])[1],
+        titleKey: (bloque.match(/\btitleKey:\s*'([^']+)'/) || [])[1],
+        subKey: (bloque.match(/\bsubKey:\s*'([^']+)'/) || [])[1],
+      };
+      /* La ficha se lee del propio archivo, entrada por entrada. */
+      const entrada = manifest.slice(manifest.indexOf(`id: '${ficha.id}'`)).split('},')[0];
+      for (const campo of ['icon', 'accent', 'titleKey', 'subKey']) {
+        const enFicha = (entrada.match(new RegExp(`\\b${campo}:\\s*'([^']+)'`)) || [])[1];
+        if (enFicha && suyos[campo] && enFicha !== suyos[campo]) {
+          desajustes.push(`${ficha.file}: la ficha dice ${campo}='${enFicha}' y el módulo dice '${suyos[campo]}'`);
+        }
+      }
+    }
+    desajustes.length
+      ? fail('Ficha y módulos coinciden', desajustes.join(' · '))
+      : ok('Ficha y módulos coinciden', 'icono, color y textos de los 8 módulos, campo por campo');
+  }
+
+  /* El router los carga bajo demanda: la carpeta debe existir y tener contenido. */
   const app = await readFile(p('js', 'app.js'), 'utf8');
-  const imported = [...app.matchAll(/from '\.\/modules\/([^']+)\.js'/g)].map((m) => m[1]);
-  const missing = imported.filter((m) => !files.includes(`${m}.js`));
-  missing.length ? fail('Módulos importados por app.js', `no existen: ${missing.join(', ')}`) : ok('Módulos importados por app.js', `${imported.length} coinciden con el disco`);
+  const usaFicha = /from '\.\/modules\/manifest\.js'/.test(app) && /cargarModulo\(/.test(app);
+  usaFicha
+    ? ok('Carga de módulos bajo demanda', 'app.js usa la ficha y carga el código al entrar')
+    : fail('Carga de módulos bajo demanda', 'app.js no usa js/modules/manifest.js: el arranque volvería a bajar los 8 módulos de golpe');
+
+  /* La trampa que hay que evitar: que alguien vuelva a importar los módulos
+   * directamente «por comodidad» y el arranque se vuelva lento sin que nadie lo
+   * note hasta que lo note la gente con mala conexión. */
+  const importadosDirectos = [...app.matchAll(/from '\.\/modules\/(?!manifest)([^']+)\.js'/g)].map((m) => m[1]);
+  importadosDirectos.length
+    ? fail('Ningún módulo importado de golpe en app.js',
+      `volverían al camino crítico del arranque: ${importadosDirectos.join(', ')}`)
+    : ok('Ningún módulo importado de golpe en app.js', 'el arranque sólo depende del núcleo');
+
   return found;
 }
 

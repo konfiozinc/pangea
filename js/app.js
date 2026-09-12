@@ -14,20 +14,20 @@ import { Engine } from './engine.js';
 import * as U from './utils.js';
 import { h, icon, clear, scope, fmt, deviceTier, storageEstimate, download, readText, zipSync, getPosition, prefersReducedMotion, debounce } from './utils.js';
 
-/* Registro de módulos. El orden define la navegación. */
-import lingua from './modules/lingua.js';
-import synapse from './modules/synapse.js';
-import veritas from './modules/veritas.js';
-import memoria from './modules/memoria.js';
-import sos from './modules/sos.js';
-import agente from './modules/agente.js';
-import nexusId from './modules/nexus-id.js';
-import simple from './modules/simple.js';
+/* Registro de módulos. El orden define la navegación.
+ *
+ * Aquí sólo se importa la FICHA de cada módulo —nombre, icono, color—, que es lo
+ * que hace falta para dibujar el menú. El CÓDIGO se carga al entrar en cada
+ * pantalla, con `cargarModulo()`. Antes se importaban los ocho de golpe, y como
+ * un módulo no puede ejecutarse hasta que su lista de dependencias está
+ * completa, el navegador tenía que bajar 298 KB más antes de pintar nada: en una
+ * conexión mala, varios segundos de pantalla de arranque.
+ *
+ * Los archivos siguen precargados por el Service Worker, así que funcionar sin
+ * conexión no cambia: se guardan al instalar la aplicación, no al visitar cada
+ * pantalla. */
+import { MODULES, cargarModulo } from './modules/manifest.js';
 
-/* `simple` va PRIMERO a propósito aunque no sea el módulo más potente: es el
- * único que una persona que no lee puede usar sin que nadie le explique nada.
- * Lo demás está para quien coordina. */
-const MODULES = [simple, lingua, synapse, veritas, memoria, sos, agente, nexusId];
 const VERSION = '1.0.0';
 const ROUTES = ['home', ...MODULES.map((m) => m.id), 'profile', 'settings'];
 
@@ -219,7 +219,13 @@ async function render() {
     if (state.route === 'home') activeCleanup = await renderHome(host);
     else if (state.route === 'settings') activeCleanup = await renderSettings(host);
     else if (state.route === 'profile') activeCleanup = await renderProfile(host, state.param);
-    else activeCleanup = await mod.mount(host, ctx);
+    else {
+      /* El código del módulo se descarga aquí, al entrar. La ficha ya se tiene,
+       * así que el título y el menú ya están pintados: lo único que se espera es
+       * el módulo en sí, y a partir de la segunda visita está en la caché. */
+      const impl = await cargarModulo(state.route);
+      activeCleanup = await impl.mount(host, ctx);
+    }
   } catch (e) {
     console.error('[pangea] error al montar', state.route, e);
     host.append(h('div.view', h('div.banner.danger',
@@ -1287,6 +1293,29 @@ async function boot() {
      * CSS ya la oculta, pero dejarla en el árbol mantendría una capa opaca
      * sobre la aplicación para siempre. */
     document.getElementById('boot')?.remove();
+
+    /* Calentado de módulos: en cuanto la aplicación está en pantalla y el
+     * navegador queda libre, se descarga el código de los ocho módulos para que
+     * al entrar en cualquiera ya esté listo.
+     *
+     * El orden importa: primero se pinta (eso es lo que espera la persona) y sólo
+     * después se aprovecha el tiempo muerto. Hacerlo al revés devolvería el
+     * problema que este cambio resuelve. Se hace de uno en uno, y si el
+     * navegador no está libre se espera: es mejor tardar en calentar que dar
+     * tirones mientras alguien lee la primera pantalla. */
+    const programar = (fn) => (typeof requestIdleCallback === 'function'
+      ? requestIdleCallback(fn, { timeout: 4000 })
+      : setTimeout(fn, 1200));
+    const calentar = () => {
+      const siguiente = (i) => {
+        if (i >= MODULES.length) return;
+        cargarModulo(MODULES[i].id).catch(() => {}).finally(() => programar(() => siguiente(i + 1)));
+      };
+      siguiente(0);
+    };
+    /* Dos segundos de margen: el calentado no debe competir con el primer
+     * pintado ni con la instalación del Service Worker. */
+    setTimeout(() => programar(calentar), 2000);
 
     Store.on('identity', async () => { state.identity = await Crypto.current(); refreshIdentityChip(); });
     Store.on('*', () => refreshIdentityChip());
